@@ -31,7 +31,7 @@ function renderGalleryElements(data) {
 
 renderGalleryElements(galleryItems);
 
-// ----------------------- Getting larger image from data -----------------------
+// ----------------------- Get larger image from data -----------------------
 
 galleryList.addEventListener("click", onGetLargerImage);
 let largeImgUrl = "";
@@ -41,12 +41,12 @@ function onGetLargerImage(event) {
   largeImgUrl = event.target.dataset.source;
 }
 
-// ----------------------- Modal open and close logic -----------------------
+// ----------------------- Modal open and close logic (+ Esc close option) -----------------------
 
 galleryList.addEventListener("click", onModalOpen);
 
 function onModalOpen() {
-  // Не могу понять как вынести эту функцию из onOpenModal, т.к. мне тут нужна переменная instance
+  // ------------------- Не могу понять как вынести эту функцию из onOpenModal, т.к. мне тут нужна переменная instance
   const onModalCloseByEscape = (event) => {
     if (event.code !== "Escape") return;
 
@@ -68,3 +68,14 @@ function onModalOpen() {
 
   instance.show();
 }
+
+// ----------------------- Modal open and close logic -----------------------
+
+// function onModalOpen() {
+//   const instance = basicLightbox.create(
+//     `
+// 		<img width="1400px" height="900px" src="${largeImgUrl}">
+// 	`
+//   );
+//   instance.show();
+// }
