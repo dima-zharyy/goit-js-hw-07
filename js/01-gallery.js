@@ -4,6 +4,7 @@ import { galleryItems } from "./gallery-items.js";
 // ----------------------- Render gallery items -----------------------
 
 const galleryList = document.querySelector(".gallery");
+let instance;
 
 function createGalleryMarkup(data) {
   return data
@@ -46,18 +47,11 @@ function onGetLargerImage(event) {
 galleryList.addEventListener("click", onModalOpen);
 
 function onModalOpen() {
-  // ------------------- Не могу понять как вынести эту функцию из onOpenModal, т.к. мне тут нужна переменная instance
-  const onModalCloseByEscape = (event) => {
-    if (event.code !== "Escape") return;
-
-    instance.close();
-  };
-
   const imageElementMarkup = `
 		<img width="1400px" height="900px" src="${largeImgUrl}">
 	`;
 
-  const instance = basicLightbox.create(imageElementMarkup, {
+  instance = basicLightbox.create(imageElementMarkup, {
     onShow: () => {
       window.addEventListener("keydown", onModalCloseByEscape);
     },
@@ -67,6 +61,12 @@ function onModalOpen() {
   });
 
   instance.show();
+}
+
+function onModalCloseByEscape(event) {
+  if (event.code !== "Escape") return;
+
+  instance.close();
 }
 
 // ----------------------- Modal open and close logic -----------------------
